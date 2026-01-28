@@ -1,0 +1,9 @@
+spring:
+  docker:
+    compose:
+      file: messaging-with-rabbitmq/compose.yaml
+
+  rabbitmq:
+    stream:
+      username: myuser
+      password: secret
