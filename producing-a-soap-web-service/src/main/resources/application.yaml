@@ -1,0 +1,3 @@
+spring:
+  webservices:
+    wsdl-locations: classpath:META-INF/schemas/

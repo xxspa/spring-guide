@@ -1,0 +1,9 @@
+###
+# curl --header "Content-Type: text/xml" -d @request.xml http://localhost:8080/services
+POST http://localhost:8080/services
+Content-Type: text/xml
+
+< request.xml
+
+###
+GET http://localhost:8080/services/countries.wsdl?wsdl
