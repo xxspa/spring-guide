@@ -1,0 +1,5 @@
+bandwagone:
+  key: ${BANDWAGONE_KEY}
+  ve-id: ${BANDWAGONE_VE_ID}
+  url: https://api.64clouds.com/v1
+  enabled: true
