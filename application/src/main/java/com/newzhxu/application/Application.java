@@ -15,7 +15,7 @@ public class Application {
     @Bean
     CommandLineRunner commandLineRunner(BandWagone ctx) {
         return args -> {
-            String start = ctx.start();
+            var start = ctx.start();
             System.out.println(start);
         };
     }

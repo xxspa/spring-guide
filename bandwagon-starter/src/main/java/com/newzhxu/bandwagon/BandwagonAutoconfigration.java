@@ -7,12 +7,15 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Arrays;
 
 @Slf4j
 @AutoConfiguration
@@ -32,11 +35,24 @@ public class BandwagonAutoconfigration {
                 .queryParam("veid", properties.getVeId())
                 .queryParam("api_key", properties.getKey())
                 .toUriString();
-
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(
+                Arrays.asList(
+                        MediaType.APPLICATION_JSON,
+                        MediaType.TEXT_PLAIN         // 关键！新增这一行
+                )
+        );
         return HttpServiceProxyFactory
                 .builderFor(RestClientAdapter.create(
                         RestClient.builder()
                                 .baseUrl(effectiveBaseUrl)
+                                .messageConverters(httpMessageConverters ->
+                                        httpMessageConverters.stream().filter(httpMessageConverter ->
+                                                        httpMessageConverter instanceof MappingJackson2HttpMessageConverter)
+                                                .findFirst()
+                                                .ifPresent(c -> {
+                                                    httpMessageConverters.set(httpMessageConverters.indexOf(c), new BandwagonMessaageConverter());
+                                                }))
                                 .build()))
                 .build()
                 .createClient(BandWagone.class);
