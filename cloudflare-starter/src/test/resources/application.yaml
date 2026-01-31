@@ -1,0 +1,3 @@
+cloudflare:
+  url: https://api.cloudflare.com/client/v4
+  api-key: ${CLOUDFLARE_API_TOKEN}
