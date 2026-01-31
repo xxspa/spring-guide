@@ -15,6 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Set;
 
 @SpringBootTest(classes = CloudflareAutoConfiguartion.class)
@@ -121,6 +124,11 @@ class RecordsTest {
     @Test
     void exportDnsRecords() {
         var exportDnsRecords = records.exportDnsRecords(zoneId);
+        try {
+            Files.write(Path.of("records.txt"), exportDnsRecords);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(exportDnsRecords);
     }
 }

@@ -1,5 +1,6 @@
 package com.newzhxu.cloudflare;
 
+import com.newzhxu.cloudflare.converter.MyByteArrayMessageConverter;
 import com.newzhxu.cloudflare.dns.Dns;
 import com.newzhxu.cloudflare.dns.dns.records.Records;
 import com.newzhxu.cloudflare.zones.Zones;
@@ -10,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
@@ -35,7 +38,10 @@ public class CloudflareAutoConfiguartion {
                                             .findFirst().ifPresent(c -> {
                                                 httpMessageConverters.set(httpMessageConverters.indexOf(c), converter);
                                             });
-//                                    httpMessageConverters.addFirst(new ByteArrayHttpMessageConverter());
+                                    httpMessageConverters.stream().filter(c -> c instanceof ByteArrayHttpMessageConverter)
+                                            .findFirst().ifPresent(c -> {
+                                                httpMessageConverters.set(httpMessageConverters.indexOf(c), new MyByteArrayMessageConverter());
+                                            });
                                 })
                                 .defaultStatusHandler(HttpStatusCode::isError, (request, response) -> {
                                     ResolvableType resolvableType = ResolvableType.forClassWithGenerics(CloudflareR.class, Void.class);
@@ -43,6 +49,11 @@ public class CloudflareAutoConfiguartion {
                                     CloudflareR<Void> errorResult = (CloudflareR<Void>) converter.read(resolvableType.getType(), CloudflareR.class, response);
                                     List<CloudflareException.ErrorInfo> errorInfos = errorResult.getErrors().stream().map(e -> new CloudflareException.ErrorInfo().setCode(e.getCode()).setMessage(e.getMessage())).toList();
                                     throw new CloudflareException("Cloudflare API returned an error", errorInfos, request.getURI().toString());
+                                })
+                                .requestInterceptor((request, body, execution) ->
+                                {
+                                    ClientHttpResponse execute = execution.execute(request, body);
+                                    return execute;
                                 })
                                 .build()))
                 .build();

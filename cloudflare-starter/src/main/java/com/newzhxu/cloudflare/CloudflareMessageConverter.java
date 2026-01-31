@@ -40,7 +40,7 @@ public class CloudflareMessageConverter extends MappingJackson2HttpMessageConver
     @Override
     public void setSupportedMediaTypes(@NonNull List<MediaType> supportedMediaTypes) {
         ArrayList<MediaType> mediaTypes = new ArrayList<>(supportedMediaTypes);
-//        mediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
+        mediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
 
         super.setSupportedMediaTypes(Collections.unmodifiableList(mediaTypes));
     }

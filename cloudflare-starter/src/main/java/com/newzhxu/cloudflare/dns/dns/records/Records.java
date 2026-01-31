@@ -35,6 +35,6 @@ public interface Records {
     CloudflareR<DeleteRecordR> deleteDnsRecord(@PathVariable String zoneId, @PathVariable String recordId);
 
     @GetExchange("/zones/{zoneId}/dns_records/export")
-    String exportDnsRecords(@PathVariable String zoneId);
+    byte[] exportDnsRecords(@PathVariable String zoneId);
 
 }
