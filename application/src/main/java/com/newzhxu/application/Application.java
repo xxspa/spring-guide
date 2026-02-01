@@ -1,6 +1,5 @@
 package com.newzhxu.application;
 
-import com.newzhxu.bandwagon.BandWagone;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,10 +12,9 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(BandWagone ctx) {
+    CommandLineRunner commandLineRunner() {
         return args -> {
-            var start = ctx.start();
-            System.out.println(start);
+
         };
     }
 }

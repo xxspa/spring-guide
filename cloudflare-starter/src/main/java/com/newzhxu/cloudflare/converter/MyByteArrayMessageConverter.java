@@ -1,5 +1,6 @@
 package com.newzhxu.cloudflare.converter;
 
+import lombok.NonNull;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class MyByteArrayMessageConverter extends ByteArrayHttpMessageConverter {
     @Override
-    public void setSupportedMediaTypes(List<MediaType> supportedMediaTypes) {
+    public void setSupportedMediaTypes(@NonNull List<MediaType> supportedMediaTypes) {
         ArrayList<MediaType> mediaTypes = new ArrayList<>(supportedMediaTypes);
         super.setSupportedMediaTypes(Collections.unmodifiableList(mediaTypes));
     }
@@ -23,12 +24,12 @@ public class MyByteArrayMessageConverter extends ByteArrayHttpMessageConverter {
     }
 
     @Override
-    public boolean canRead(Class<?> clazz, @Nullable MediaType mediaType) {
+    public boolean canRead(@NonNull Class<?> clazz, @Nullable MediaType mediaType) {
         return super.canRead(clazz, mediaType);
     }
 
     @Override
-    public byte[] readInternal(Class<? extends byte[]> clazz, HttpInputMessage message) throws IOException {
+    public byte @NonNull [] readInternal(@NonNull Class<? extends byte[]> clazz, @NonNull HttpInputMessage message) throws IOException {
         return super.readInternal(clazz, message);
     }
 }
