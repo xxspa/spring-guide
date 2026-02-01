@@ -2,9 +2,9 @@ package com.newzhxu.test;
 
 import com.newzhxu.api.DoSomething;
 
-public class DemoBean implements DoSomething {
+public class DemoBean1 implements DoSomething {
     @Override
     public String doIt(String input) {
-        return input + 1;
+        return input + "2";
     }
 }

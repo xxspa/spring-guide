@@ -15,6 +15,7 @@ dependencies {
     implementation(project(":test-starter"))
     implementation(project(":bandwagon-starter"))
     implementation(project(":cloudflare-starter"))
+    implementation(project(":api"))
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")

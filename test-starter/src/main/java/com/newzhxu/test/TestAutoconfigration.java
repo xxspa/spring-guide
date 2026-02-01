@@ -18,4 +18,11 @@ public class TestAutoconfigration {
         return new DemoBean();
     }
 
+    @Bean
+    DemoBean1 demoBean1(TestProperties testProperties) {
+        log.info("DemoBean1 created by TestAutoconfigration");
+        log.info("TestProperties: {}", testProperties);
+        return new DemoBean1();
+    }
+
 }
