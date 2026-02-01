@@ -2,6 +2,9 @@ package com.newzhxu.application.vps;
 
 import com.newzhxu.bandwagon.BandWagone;
 import com.newzhxu.bandwagon.result.ShellScriptExecR;
+import com.newzhxu.cloudflare.Cloudflare;
+import com.newzhxu.cloudflare.CloudflareR;
+import com.newzhxu.cloudflare.zones.result.ZonesResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @RequiredArgsConstructor
 public class VpsService {
     private final BandWagone bandWagone;
+    private final Cloudflare cloudflare;
     private final List<Path> resultLogs = new CopyOnWriteArrayList<>();
 
     public void executeVpsTask(String shellScript) {
@@ -32,5 +36,10 @@ public class VpsService {
                 .toList();
 
         return list;
+    }
+
+    public String zones() {
+        CloudflareR<List<ZonesResponse>> listCloudflareR = cloudflare.getZones().listZones();
+        return listCloudflareR.toString();
     }
 }

@@ -38,4 +38,11 @@ public class VpsController {
         }
         return R.ok(logs);
     }
+
+    @GetMapping
+    @Operation(summary = "获取 Zones 列表", description = "获取 Cloudflare 的 Zones 列表")
+    public R<String> zones() {
+        String zones = vps.zones();
+        return R.ok(zones);
+    }
 }

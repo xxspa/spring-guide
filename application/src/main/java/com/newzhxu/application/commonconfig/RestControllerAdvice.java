@@ -23,7 +23,7 @@ public class RestControllerAdvice {
     @ExceptionHandler(NoContent.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> handleNotFoundException(NoContent e) {
-        log.info("No content: {}", e.getMessage(), e);
+//        log.info("No content: {}", e.getMessage(), e);
         return ResponseEntity.noContent().build();  // 明确 204 + 无 body
     }
 }

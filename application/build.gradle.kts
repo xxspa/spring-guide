@@ -14,11 +14,12 @@ repositories {
 dependencies {
     implementation(project(":test-starter"))
     implementation(project(":bandwagon-starter"))
+    implementation(project(":cloudflare-starter"))
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     // Source: https://mvnrepository.com/artifact/org.projectlombok/lombok
-    implementation("org.projectlombok:lombok:1.18.42")
+    compileOnly("org.projectlombok:lombok:1.18.42")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     annotationProcessor("org.projectlombok:lombok:1.18.42")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.15") {
