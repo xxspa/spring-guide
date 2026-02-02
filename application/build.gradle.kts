@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("maven-publish")
     alias(libs.plugins.dependency.management)
     alias(libs.plugins.spring.boot)
 }
@@ -8,9 +9,10 @@ group = "com.newzhxu"
 version = "unspecified"
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
-
+val mockitoAgent = configurations.create("mockitoAgent")
 dependencies {
     implementation(project(":test-starter"))
     implementation(project(":bandwagon-starter"))
@@ -28,11 +30,12 @@ dependencies {
     }
     implementation("org.apache.commons:commons-lang3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    mockitoAgent("org.mockito:mockito-core") { isTransitive = false }
 }
 
 tasks.test {
     useJUnitPlatform()
+    jvmArgs("-javaagent:${mockitoAgent.asPath}")
+    jvmArgs("-Xshare:off")
 }
