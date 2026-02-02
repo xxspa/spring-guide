@@ -1,0 +1,13 @@
+[versions]
+spring-boot = "3.5.9"
+dependency-management = "1.1.7"
+lombok = "1.18.42"
+spring-ai = "1.1.2"
+
+[libraries]
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+spring-ai-bom = { group = "org.springframework.ai", name = "spring-ai-bom", version.ref = "spring-ai" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+dependency-management = { id = "io.spring.dependency-management", version.ref = "dependency-management" }

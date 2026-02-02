@@ -39,10 +39,17 @@ public class VpsController {
         return R.ok(logs);
     }
 
-    @GetMapping
+    @GetMapping("/zones")
     @Operation(summary = "获取 Zones 列表", description = "获取 Cloudflare 的 Zones 列表")
     public R<String> zones() {
         String zones = vps.zones();
         return R.ok(zones);
+    }
+
+    @GetMapping("/liveServiceInfo")
+    @Operation(summary = "获取实时服务信息", description = "获取 BandWagone 的实时服务信息")
+    public R<String> getliveServiceInfo() {
+        String info = vps.getliveServiceInfo();
+        return R.ok(info);
     }
 }

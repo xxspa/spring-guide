@@ -1,7 +1,7 @@
 plugins {
     id("java")
-    id("org.springframework.boot") version "3.5.9"
-    id("io.spring.dependency-management") version "1.1.7"
+    alias(libs.plugins.dependency.management)
+    alias(libs.plugins.spring.boot)
 }
 
 group = "com.newzhxu"
@@ -20,9 +20,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     // Source: https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly("org.projectlombok:lombok:1.18.42")
+    compileOnly(libs.lombok)
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    annotationProcessor("org.projectlombok:lombok:1.18.42")
+    annotationProcessor(libs.lombok)
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.15") {
         exclude("org.apache.commons", "commons-lang3")
     }

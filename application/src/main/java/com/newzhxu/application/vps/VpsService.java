@@ -1,6 +1,7 @@
 package com.newzhxu.application.vps;
 
 import com.newzhxu.bandwagon.BandWagone;
+import com.newzhxu.bandwagon.result.GetLiveServiceInfoR;
 import com.newzhxu.bandwagon.result.ShellScriptExecR;
 import com.newzhxu.cloudflare.Cloudflare;
 import com.newzhxu.cloudflare.CloudflareR;
@@ -41,5 +42,13 @@ public class VpsService {
     public String zones() {
         CloudflareR<List<ZonesResponse>> listCloudflareR = cloudflare.getZones().listZones();
         return listCloudflareR.toString();
+    }
+
+    public String getliveServiceInfo() {
+        GetLiveServiceInfoR liveServiceInfo = bandWagone.getLiveServiceInfo();
+        if (liveServiceInfo.getError() != 0) {
+            throw new RuntimeException(liveServiceInfo.getMessage());
+        }
+        return liveServiceInfo.toString();
     }
 }
