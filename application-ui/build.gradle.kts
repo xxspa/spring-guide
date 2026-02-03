@@ -1,4 +1,4 @@
-import com.github.gradle.node.npm.task.NpmTask
+import com.github.gradle.node.pnpm.task.PnpmTask
 
 plugins {
     id("com.github.node-gradle.node") version "7.1.0"  // 2025-2026 最新稳定版
@@ -16,11 +16,11 @@ node {
 tasks.pnpmInstall {
     args.addAll("--loglevel=debug", "--reporter=ndjson")
 }
-tasks.register<NpmTask>("frontendBuild") {
+tasks.register<PnpmTask>("frontendBuild") {
     dependsOn(tasks.pnpmInstall)
     args.set(listOf("run", "build")) // 假设你的前端构建脚本是 "build"
 }
-tasks.register<NpmTask>("frontendDev") {
+tasks.register<PnpmTask>("frontendDev") {
     dependsOn(tasks.pnpmInstall)
     args.set(listOf("run", "dev")) // 假设你的前端构建脚本是 "build"
 }

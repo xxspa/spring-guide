@@ -3,3 +3,15 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+spring:
+  docker:
+    compose:
+      file: application/compose.yaml
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/guide
+    username: guide
+    password: openpostgresql
+  jpa:
+    hibernate:
+      ddl-auto: update

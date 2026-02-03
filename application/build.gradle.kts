@@ -21,6 +21,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    testImplementation("org.springframework.security:spring-security-test")
     // Source: https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly(libs.lombok)
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -30,6 +33,9 @@ dependencies {
     }
     implementation("org.apache.commons:commons-lang3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("com.h2database:h2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     mockitoAgent("org.mockito:mockito-core") { isTransitive = false }
 }
