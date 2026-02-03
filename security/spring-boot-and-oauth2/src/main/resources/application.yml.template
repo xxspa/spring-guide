@@ -1,0 +1,31 @@
+# Application Configuration Template
+# 将此文件复制为 application.yml 并填入你的 OAuth 凭证
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          # GitHub OAuth Configuration
+          github:
+            clientId: your-github-client-id-here
+            clientSecret: your-github-client-secret-here
+            # 获取方式：https://github.com/settings/developers
+            # 回调 URL: http://localhost:8080/login/oauth2/code/github
+          
+          # Google OAuth Configuration (可选)
+          google:
+            client-id: your-google-client-id-here
+            client-secret: your-google-client-secret-here
+            # 获取方式：https://console.developers.google.com/
+            # 回调 URL: http://localhost:8080/login/oauth2/code/google
+
+# 服务器配置（可选）
+server:
+  port: 8080
+
+# 日志配置（可选）
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG

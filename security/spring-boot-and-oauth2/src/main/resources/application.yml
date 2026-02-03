@@ -1,0 +1,13 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: Ov23liLlH42dypDOahF7
+            clientSecret: fb05af71ec2b4cb614b76b8cca2f6be7b9769829
+          google:
+            client-id: google-client-id
+            client-secret: google-client-secret
+            # 请替换为你的 Google OAuth 凭证
+            # 在 https://console.developers.google.com/ 创建
