@@ -26,3 +26,8 @@ tasks.register<NpmTask>("frontendDev") {
 }
 
 
+tasks.register<Copy>("copyFrontendBuild") {
+    dependsOn("frontendBuild")
+    from(file("dist")) // 假设前端构建输出在 dist 目录
+    into(file("../application/src/main/resources/static")) // 复制到 Spring Boot 的静态资源目录
+}
