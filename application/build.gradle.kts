@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.newzhxu"
-version = "unspecified"
+version = "0.0.1"
 
 repositories {
     mavenLocal()
@@ -38,4 +38,28 @@ tasks.test {
     useJUnitPlatform()
     jvmArgs("-javaagent:${mockitoAgent.asPath}")
     jvmArgs("-Xshare:off")
+}
+tasks.bootBuildImage {
+    val userName = System.getenv("DOCKER_USERNAME") ?: throw GradleException("Missing DOCKER_USERNAME")
+    val p = System.getenv("DOCKER_PASSWORD") ?: throw GradleException("Missing DOCKER_PASSWORD")
+    imageName = "${userName}/${project.name}:${project.version}"
+    publish = true
+    tags = setOf(
+        "${userName}/${project.name}:latest",
+        "${userName}/${project.name}:${project.version}"
+    )
+    docker {
+        publishRegistry {
+            username = userName
+            password = p
+        }
+    }
+}
+
+tasks.register<Exec>("pushImage") {
+    val userName = System.getenv("DOCKER_USERNAME") ?: throw GradleException("Missing DOCKER_USERNAME")
+
+//    dependsOn(tasks.bootBuildImage)
+    commandLine("docker", "push", "${userName}/${project.name}:${project.version}")
+
 }
