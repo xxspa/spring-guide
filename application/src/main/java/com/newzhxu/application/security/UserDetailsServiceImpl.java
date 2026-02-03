@@ -76,6 +76,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserDetailsPa
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return myUserRepo.getMyUserByUsername(username.toLowerCase(Locale.ROOT))
                 .orElseThrow(() -> new UsernameNotFoundException(username));
@@ -86,11 +87,13 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserDetailsPa
     public void createUser(UserDetails user) {
         validateUserDetails(user);
         MyUser myUser = assertMyUser(user);
+        myUser.setPassword(passwordEncoder.encode(user.getPassword()));
         myUserRepo.save(myUser);
 
     }
 
     @Override
+    @Transactional
     public void updateUser(UserDetails user) {
         validateUserDetails(user);
         MyUser myUser = assertMyUser(user);
@@ -99,6 +102,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserDetailsPa
     }
 
     @Override
+    @Transactional
     public void deleteUser(String username) {
         myUserRepo.deleteMyUserByUsername(username.toLowerCase(Locale.ROOT));
 
@@ -106,12 +110,14 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserDetailsPa
 
 
     @Override
+    @Transactional
     public boolean userExists(String username) {
 
         return myUserRepo.getMyUserByUsername(username.toLowerCase(Locale.ROOT)).isPresent();
     }
 
     @Override
+    @Transactional
     public void changePassword(String oldPassword, String newPassword) {
         // 获取当前认证信息
         Authentication currentUser = securityContextHolderStrategy.getContext().getAuthentication();

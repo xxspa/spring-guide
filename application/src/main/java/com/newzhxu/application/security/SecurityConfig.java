@@ -3,16 +3,17 @@ package com.newzhxu.application.security;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -29,17 +30,21 @@ public class SecurityConfig {
                 ).formLogin(configure -> {
                     configure.loginProcessingUrl("/login")
                             .successHandler((request, response, authentication) -> {
-
+                                response.setStatus(HttpStatus.OK.value());
+                                response.setContentType("application/json;charset=UTF-8");
+                                response.getWriter().write("{\"status\":\"ok\"}");
                             })
                             .failureHandler((request, response, exception) -> {
                                 response.setStatus(401);
                             })
+
                             .usernameParameter("username")
                             .passwordParameter("password")
                     ;
                 })
         ;
-        return http.build();
+        DefaultSecurityFilterChain build = http.build();
+        return build;
     }
 
     @Bean
@@ -57,9 +62,9 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService(MyUserRepo myUserRepo, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
 //        jdbcUserDetailsManager.setJdbcTemplate(jdbcTemplate);
-        jdbcUserDetailsManager.createUser(User.withUsername("admin").password("admin").roles("USER").build());
-
-        jdbcUserDetailsManager.setAuthenticationManager(authenticationManager);
+//        jdbcUserDetailsManager.createUser(User.withUsername("admin").password("admin").roles("USER").build());
+//
+//        jdbcUserDetailsManager.setAuthenticationManager(authenticationManager);
 //        return jdbcUserDetailsManager;
         return new UserDetailsServiceImpl(myUserRepo, authenticationManager, passwordEncoder);
     }

@@ -20,6 +20,7 @@ public class MyUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true, nullable = false) // 确保唯一性
     private String username;
     private String password;
     @ElementCollection(fetch = FetchType.EAGER) // 立即加载权限
@@ -31,6 +32,9 @@ public class MyUser implements UserDetails {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
+
+    @Version
+    private Integer version;
 
     @Override
 
