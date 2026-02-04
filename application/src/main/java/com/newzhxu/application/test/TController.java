@@ -1,6 +1,7 @@
 package com.newzhxu.application.test;
 
 import com.newzhxu.api.DoSomething;
+import com.newzhxu.application.aop.RedisLock;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
@@ -18,6 +19,7 @@ public class TController {
     private final RedissonClient redissonClient;
 
     @GetMapping("/do")
+    @RedisLock(key = "'order_lock:' + #input")
     public String doIt(String input) {
         String address = redissonClient.getConfig().useSingleServer().getAddress();
         log.info("address:{}", address);

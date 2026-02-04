@@ -13,4 +13,12 @@ public class TestConfig {
                 .pathsToMatch("/test/**")
                 .build();
     }
+
+    @Bean
+    GroupedOpenApi aOpenApi() {
+        return GroupedOpenApi.builder()
+                .group("a")
+                .pathsToMatch("/a/**")
+                .build();
+    }
 }

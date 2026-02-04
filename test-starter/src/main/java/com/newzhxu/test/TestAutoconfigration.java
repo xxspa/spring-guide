@@ -5,9 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 @AutoConfiguration
 @EnableConfigurationProperties(TestProperties.class)
+@Import(TestContrller.class)
 public class TestAutoconfigration {
     private static final Logger log = LoggerFactory.getLogger(TestAutoconfigration.class);
 
