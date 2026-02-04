@@ -7,6 +7,13 @@ spring-ai = "1.1.2"
 [libraries]
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 spring-ai-bom = { group = "org.springframework.ai", name = "spring-ai-bom", version.ref = "spring-ai" }
+spring-boot-starter = { group = "org.springframework.boot", name = "spring-boot-starter" }
+
+mapstruct = { group = "org.mapstruct", name = "mapstruct", version = "1.6.3" }
+mapstruct-processor = { group = "org.mapstruct", name = "mapstruct-processor", version = "1.6.3" }
+# Source: https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding
+lombok-mapstruct-binding = { group = "org.projectlombok", name = "lombok-mapstruct-binding", version = "0.2.0" }
+
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

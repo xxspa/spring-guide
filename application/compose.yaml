@@ -17,7 +17,7 @@ services:
       - POSTGRES_DB=guide
       - PGUSER=guide
   redis:
-    image: redis:7.0.12
+    image: redis:8.4.0
     container_name: 'guide-redis-dev'
     shm_size: 128mb
     restart: on-failure:3
