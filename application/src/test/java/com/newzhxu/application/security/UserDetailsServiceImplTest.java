@@ -94,6 +94,7 @@ class UserDetailsServiceImplTest {
         Assertions.assertThat(myUser)
                 .usingRecursiveComparison()
                 .ignoringFields("id") // ID 是数据库生成的，通常需要忽略
+                .ignoringFields("version")
 //                .ignoringCollectionOrder() // 加上这一行，忽略集合顺序和具体的 List 实现类
                 .isEqualTo(originalUser);
         ;

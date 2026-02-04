@@ -36,7 +36,14 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/index.html", "/assets/**", "/login").permitAll()
+                        .requestMatchers("/",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+
+
+
+                                "/index.html", "/assets/**", "/login").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin(configure -> {
                     configure.loginProcessingUrl("/login")
@@ -52,9 +59,12 @@ public class SecurityConfig {
                                 response.getWriter().write(objectMapper.writeValueAsString(voidR));
                             })
 
-                            .usernameParameter("username")
-                            .passwordParameter("password")
+//                            .usernameParameter("username")
+//                            .passwordParameter("password")
                     ;
+                })
+                .httpBasic(config->{
+
                 })
                 .exceptionHandling(e -> {
                     e.accessDeniedHandler((request, response, accessDeniedException) -> {

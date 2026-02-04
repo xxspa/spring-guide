@@ -16,7 +16,6 @@ public class RestControllerAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R<Void> handleException(Exception e) {
         log.error(e.getMessage(), e);
-
         return R.fail("服务器异常");
     }
 

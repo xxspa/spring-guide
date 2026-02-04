@@ -16,3 +16,15 @@ services:
       - POSTGRES_USER=guide
       - POSTGRES_DB=guide
       - PGUSER=guide
+  redis:
+    image: redis:7.0.12
+    container_name: 'guide-redis-dev'
+    shm_size: 128mb
+    restart: on-failure:3
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
