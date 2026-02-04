@@ -49,7 +49,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     jvmArgs("-javaagent:${mockitoAgent.asPath}")
-    jvmArgs("-Xshare:off")
+//    jvmArgs("-Xshare:off")
 }
 tasks.bootBuildImage {
     val userName = System.getenv("DOCKER_USERNAME") ?: throw GradleException("Missing DOCKER_USERNAME")

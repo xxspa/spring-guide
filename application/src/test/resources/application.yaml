@@ -1,0 +1,23 @@
+bandwagone:
+  key: ${BANDWAGONE_KEY}
+  ve-id: ${BANDWAGONE_VE_ID}
+  url: https://api.64clouds.com/v1
+  enabled: true
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+cloudflare:
+  url: https://api.cloudflare.com/client/v4
+  api-key: ${CLOUDFLARE_API_TOKEN}
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6388
+  aop:
+    proxy-target-class: true
+  jpa:
+    open-in-view: false

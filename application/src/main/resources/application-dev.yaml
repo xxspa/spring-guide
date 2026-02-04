@@ -4,6 +4,11 @@ springdoc:
   swagger-ui:
     enabled: true
 spring:
+
+  data:
+    redis:
+      host: "127.0.0.1"
+      port: 6388
   docker:
     compose:
       file: application/compose.yaml

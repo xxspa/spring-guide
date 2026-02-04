@@ -22,7 +22,7 @@ services:
     shm_size: 128mb
     restart: on-failure:3
     ports:
-      - "6380:6379"
+      - "6388:6379"
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
