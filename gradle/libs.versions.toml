@@ -13,6 +13,7 @@ mapstruct = { group = "org.mapstruct", name = "mapstruct", version = "1.6.3" }
 mapstruct-processor = { group = "org.mapstruct", name = "mapstruct-processor", version = "1.6.3" }
 # Source: https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding
 lombok-mapstruct-binding = { group = "org.projectlombok", name = "lombok-mapstruct-binding", version = "0.2.0" }
+byte-buddy = { group = "net.bytebuddy", name = "byte-buddy", version = "1.18.4" }
 
 
 [plugins]
