@@ -58,7 +58,7 @@ public class Agent {
 //                })
 //
 //                .installOn(inst);
-
+        System.out.println("agentOps: " + agentOps);
         // 1. 准备你的配置数组
         List<TransformationConfig> configs = new ArrayList<>();
 
