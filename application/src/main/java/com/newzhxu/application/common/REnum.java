@@ -6,6 +6,8 @@ import lombok.Getter;
 public enum REnum {
     SUCCESS(true, 200, "Success"),
     NO_CONTENT(true, 204, "Success"),
+    AUTHENTICATION_FAILED(false, 401, "Authentication Failed"),
+    FORBIDDEN(false, 403, "Forbidden"),
     ERROR(false, 500, "Error"),
     ;
     private final boolean success;
