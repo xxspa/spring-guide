@@ -75,3 +75,6 @@ tasks.register<Exec>("pushImage") {
     commandLine("docker", "push", "${userName}/${project.name}:${project.version}")
 
 }
+tasks.compileJava {
+    options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
+}

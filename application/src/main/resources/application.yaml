@@ -15,3 +15,5 @@ cloudflare:
 spring:
   aop:
     proxy-target-class: true
+  jpa:
+    open-in-view: false
